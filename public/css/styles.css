@@ -1,0 +1,204 @@
+/* General */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fefaf5; /* Fondo blanco crema */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Contenedor principal centrado */
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    margin: 20px;
+}
+
+/* Encabezados */
+h1, h2, h3 {
+    color: #b381b3; /* Morado agradable */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Formularios */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Botones */
+button {
+    background-color: #b381b3; /* Morado */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #b381b3; /* Morado más claro */
+}
+
+/* Enlaces */
+a {
+    color: #b381b3; 
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+th {
+    background-color: #b381b3; /* Fondo morado para encabezados */
+    color: white;
+    text-align: center;
+}
+
+td {
+    text-align: center;
+    background-color: #fefaf5; /* Fondo blanco crema para celdas */
+}
+
+td button {
+    margin: 0 5px;
+}
+
+td a {
+    margin: 0 5px;
+}
+
+/* Centrando el contenido */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Contenedor de la tabla */
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+/* Mensajes de estado (éxito, error) */
+.message {
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: center;
+    max-width: 400px;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Botones grandes en la página de bienvenida */
+.button-container {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+}
+
+.button {
+    background-color: #b381b3; 
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #b381b3;
+}
+
+/* Styling for "Volver a la lista" in edit page */
+.btn-volver-lista {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #b381b3; 
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-volver-lista:hover {
+    background-color: #b381b3; 
+}
+
+/* Back buttons in listing pages */
+.enlaces-tabla {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-volver {
+    background-color: #b381b3; 
+    padding: 10px 20px;
+    margin: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.btn-volver:hover {
+    background-color: #b381b3; 
+}
