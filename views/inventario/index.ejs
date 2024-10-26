@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container table-container">
+        <h1>Lista de Productos</h1>
+        <div class="enlaces-tabla">
+            <a href="/" class="btn btn-volver">Volver al inicio</a>
+            <a href="/inventario/create"  class="btn btn-volver">Agregar Producto</a>
+        </div>
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+            </tr>
+            <% productos.forEach(producto => { %>
+            <tr>
+                <td><%= producto.nombre %></td>
+                <td><%= producto.categoria %></td>
+                <td><%= producto.precio %></td>
+                <td><%= producto.cantidad %></td>
+                <td>
+                    <a href="/inventario/details/<%= producto.id %>">Ver</a>
+                    <a href="/inventario/edit/<%= producto.id %>">Editar</a>
+                    <form action="/inventario/delete/<%= producto.id %>" method="POST" style="display:inline;">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+    </div>
+</body>
+
+</html>

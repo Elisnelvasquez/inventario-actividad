@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Agregar Producto</h1>
+        <form action="/inventario/create" method="POST" style="margin-bottom: 8px;">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" required><br>
+
+            <label for="nombre">Descripción:</label>
+            <input type="text" name="descripcion" required><br>
+
+            <label for="categoria">Categoría:</label>
+            <input type="text" name="categoria" required><br>
+
+            <label for="precio">Precio:</label>
+            <input type="number" name="precio" step="0.01" required><br>
+
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" name="cantidad" required><br>
+
+            <label for="descripcion">Proveedor:</label>
+            <input type="text" name="proveedor" required></input><br>
+
+            <label for="descripcion">Fecha ingreso:</label>
+            <input name="fecha_ingreso" type="date" required></input><br>
+
+            <label for="descripcion">Código barras:</label>
+            <input type="text" name="codigo_barras" required></input><br>
+
+            <button type="submit">Guardar</button>
+        </form>
+        <a href="/inventario" style="text-decoration: underline;">Volver a la lista</a>
+    </div>
+</body>
+
+</html>
