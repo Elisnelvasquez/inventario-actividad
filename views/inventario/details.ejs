@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Producto</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Detalles del Producto</h1>
+        <p><strong>Nombre:</strong> <%= producto.nombre %></p>
+        <p><strong>Categoría:</strong> <%= producto.categoria %></p>
+        <p><strong>Precio:</strong> <%= producto.precio %></p>
+        <p><strong>Cantidad:</strong> <%= producto.cantidad %></p>
+        <p><strong>Descripción:</strong> <%= producto.descripcion %></p>
+        <p><strong>Proveedor:</strong> <%= producto.proveedor %></p>
+        <p><strong>Fecha ingreso:</strong> <%= new Date(producto.fecha_ingreso).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+        <p><strong>Código barras:</strong> #<%= producto.codigo_barras %></p>
+
+        <a href="/inventario" class="btn btn-volver" style="margin: 0px;">Volver a la lista</a>
+    </div>
+</body>
+
+</html>
