@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Trabajador</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Detalles del Trabajador</h1>
+        <p><strong>Nombre:</strong> <%= trabajador.nombre %></p>
+        <p><strong>Apellido:</strong> <%= trabajador.apellido %></p>
+        <p><strong>Telefono:</strong> <%= trabajador.telefono %></p>
+        <p><strong>Puesto:</strong> <%= trabajador.puesto %></p>
+        <p><strong>Email:</strong> <%= trabajador.email %></p>
+        <p><strong>Salario:</strong> <%= trabajador.salario %></p>   
+        <p><strong>Fecha contratación:</strong> <%= new Date(trabajador.fecha_contratacion).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>   
+        <a href="/trabajadores" class="btn btn-volver" style="margin: 0px;">Volver a la lista</a>
+    </div>
+</body>
+
+</html>

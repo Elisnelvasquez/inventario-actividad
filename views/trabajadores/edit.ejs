@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Trabajador</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Editar Trabajador</h1>
+        <form action="/trabajadores/edit/<%= trabajador.id %>" method="POST">
+           <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" required value="<%= trabajador.nombre %>"><br>
+            <label for="nombre">Apellido:</label>
+            <input type="text" name="apellido" required value="<%= trabajador.apellido %>"><br>
+            <label for="nombre">Telefono:</label>
+            <input type="text" name="telefono" required value="<%= trabajador.telefono %>"><br>
+            <label for="nombre">Email:</label>
+            <input type="text" name="email" required value="<%= trabajador.email %>"><br>
+            <label for="puesto">Puesto:</label>
+            <input type="text" name="puesto" required value="<%= trabajador.puesto %>"><br>
+            <label for="salario">Salario:</label>
+            <input type="number" name="salario" required value="<%= trabajador.salario %>"><br>
+            <button type="submit">Actualizar</button>
+        </form>
+        <a href="/trabajadores" class="btn btn-volver-lista">Volver a la lista</a>
+    </div>
+</body>
+
+</html>
