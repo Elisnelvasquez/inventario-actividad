@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Trabajadores</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container table-container">
+        <h1>Lista de Trabajadores</h1>
+        <div class="enlaces-tabla">
+            <a href="/" class="btn btn-volver">Volver al inicio</a>
+            <a href="/trabajadores/create" class="btn btn-volver">Agregar Trabajador</a>
+        </div>
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Puesto</th>
+                <th>Salario</th>
+                <th>Acciones</th>
+            </tr>
+            <% trabajadores.forEach(trabajador => { %>
+            <tr>
+                <td><%= trabajador.nombre %></td>
+                <td><%= trabajador.puesto %></td>
+                <td><%= trabajador.salario %></td>
+                <td>
+                    <a href="/trabajadores/details/<%= trabajador.id %>">Ver</a>
+                    <a href="/trabajadores/edit/<%= trabajador.id %>">Editar</a>
+                    <form action="/trabajadores/delete/<%= trabajador.id %>" method="POST" style="display:inline;">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Trabajador</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Agregar Trabajador</h1>
+        <form action="/trabajadores/create" method="POST" style="margin-bottom: 8px;">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" required><br>
+            <label for="nombre">Apellido:</label>
+            <input type="text" name="apellido" required><br>
+            <label for="nombre">Telefono:</label>
+            <input type="text" name="telefono" required><br>
+            <label for="nombre">Email:</label>
+            <input type="text" name="email" required><br>
+            <label for="puesto">Puesto:</label>
+            <input type="text" name="puesto" required><br>
+            <label for="salario">Salario:</label>
+            <input type="number" name="salario" required><br>
+            <label for="salario">Fecha contratación:</label>
+            <input type="date" name="fecha_contratacion" required><br>
+            <button type="submit">Guardar</button>
+        </form>
+        <a href="/trabajadores" style="text-decoration: underline;">Volver a la lista</a>
+    </div>
+</body>
+
+</html>
