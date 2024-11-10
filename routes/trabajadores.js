@@ -1,26 +1,30 @@
 const express = require('express');
 const router = express.Router();
 const TrabajadoresController = require('../controllers/TrabajadoresController');
+const { authenticate, authorize } = require("../middleware/authMiddleware");
 
-// Ruta para listar todos los trabajadores
-router.get('/', TrabajadoresController.index);
-
-// Ruta para mostrar el formulario de crear un nuevo trabajador
-router.get('/create', TrabajadoresController.create);
-
-// Ruta para guardar un nuevo trabajador
-router.post('/create', TrabajadoresController.store);
-
-// Ruta para mostrar el formulario de edición de un trabajador
-router.get('/edit/:id', TrabajadoresController.edit);
-
-// Ruta para actualizar un trabajador existente
-router.post('/edit/:id', TrabajadoresController.update);
-
-// Ruta para eliminar un trabajador
-router.post('/delete/:id', TrabajadoresController.delete);
-
-// Ruta para mostrar detalles de un trabajador
+// Rutas protegidas con autenticación
+router.get("/", TrabajadoresController.index);
+router.get("/create", TrabajadoresController.create);
+router.post(
+  "/create",
+  authenticate,
+  authorize(["admin", "editor"]),
+  TrabajadoresController.store
+);
+router.get("/edit/:id", TrabajadoresController.edit);
+router.post(
+  "/edit/:id",
+  authenticate,
+  authorize(["admin", "editor"]),
+  TrabajadoresController.update
+);
+router.post(
+  "/delete/:id",
+  authenticate,
+  authorize(["admin"]),
+  TrabajadoresController.delete
+);
 router.get('/details/:id', TrabajadoresController.details);
 
 module.exports = router;

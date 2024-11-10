@@ -1,10 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-// Ruta principal (home)
+// Ruta principal '/'
 router.get('/', (req, res) => {
-    res.render('welcome'); // Carga la vista welcome.ejs
+    res.render('auth/login'); // Carga la vista auth/login.ejs
 });
 
-module.exports = router;
-  
+// Ruta /dashboard'
+router.get('/dashboard', (req, res) => {
+    res.render('welcome', {token: null}); //  Carga la vista welcome.ejs 
+});
+
+module.exports = router;   
+   
