@@ -30,24 +30,24 @@
         </form>
         <a href="/inventario" class="btn btn-volver-lista">Volver a la lista</a>
     </div>
-<script>
-    // Obtener el token del localStorage
-    const token = localStorage.getItem('auth_token');
+    <script>
+        // Obtener el token del localStorage
+        const token = localStorage.getItem('auth_token');
 
-    if (!token) {
+        if (!token) {
         // Redirigir al inicio de sesión si no hay token
         window.location.replace('/');
-    }
+        }
 
-    document.getElementById('edit-product-form').addEventListener('submit', function (event) {
+        document.getElementById('edit-product-form').addEventListener('submit', function(event) {
         event.preventDefault();
 
-        // Obtener los datos del formulario
-        const formData = new FormData(this);
-        const data = Object.fromEntries(formData);
+            // Obtener los datos del formulario
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
 
-        // Enviar la solicitud con fetch
-        fetch(this.action, {
+            // Enviar la solicitud con fetch
+            fetch(this.action, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -55,14 +55,8 @@
                 },
                 body: JSON.stringify(data)
             })
-            .then(response => response.json().then(data => ({
-                status: response.status,
-                body: data
-            })))
-            .then(({
-                status,
-                body
-            }) => {
+            .then(response => response.json().then(data => ({ status: response.status, body: data })))
+            .then(({ status, body }) => {
                 if (status === 200) {
                     Swal.fire(
                         'Producto Actualizado',
@@ -87,7 +81,7 @@
                     'error'
                 );
             });
-    });
-</script>
+        });
+        </script>
 </body>
 </html>

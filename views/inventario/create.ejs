@@ -29,21 +29,21 @@
             <label for="codigo_barras">Código barras:</label>
             <input type="text" name="codigo_barras" required><br>
             <button type="submit">Guardar</button>
-            </form>
-            <a href="/inventario" style="text-decoration: underline;">Volver a la lista</a>
-            </div>
+        </form>
+        <a href="/inventario" style="text-decoration: underline;">Volver a la lista</a>
+        </div>
 
     <script>
         // Obtener el token del localStorage
         const token = localStorage.getItem('auth_token');
 
         if (!token) {
-        // Redirigir al inicio de sesión si no hay token
-        window.location.replace('/');
+            // Redirigir al inicio de sesión si no hay token
+            window.location.replace('/');
         }
 
         document.getElementById('create-product-form').addEventListener('submit', function(event) {
-        event.preventDefault();
+            event.preventDefault();
 
             // Obtener los datos del formulario
             const formData = new FormData(this);
@@ -51,40 +51,40 @@
 
             // Enviar la solicitud con fetch
             fetch('/inventario/create', {
-            method: 'POST',
-            headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+                method: 'POST',
+                headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             })
             .then(response => response.json().then(data => ({ status: response.status, body: data })))
             .then(({ status, body }) => {
-            if (status === 200) {
-            Swal.fire(
-            'Producto Agregado',
-            'El producto ha sido agregado exitosamente.',
-            'success'
-            ).then(() => {
-            window.location.href = '/inventario';
-            });
-            } else {
-            Swal.fire(
-            'Error',
-            body.message || 'Hubo un problema al agregar el producto.',
-            'error'
-            );
-            }
+                if (status === 200) {
+                Swal.fire(
+                'Producto Agregado',
+                'El producto ha sido agregado exitosamente.',
+                'success'
+                ).then(() => {
+                window.location.href = '/inventario';
+                });
+                } else {
+                Swal.fire(
+                'Error',
+                body.message || 'Hubo un problema al agregar el producto.',
+                'error'
+                );
+                }
             })
             .catch(error => {
-            console.error('Error:', error);
-            Swal.fire(
-            'Error',
-            'Hubo un problema al agregar el producto.',
-            'error'
-            );
+                console.error('Error:', error);
+                Swal.fire(
+                'Error',
+                'Hubo un problema al agregar el producto.',
+                'error'
+                );
             });
-            });
-            </script>
+        });
+        </script>
 </body>
 </html>
