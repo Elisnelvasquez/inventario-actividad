@@ -1,8 +1,19 @@
+-- Crear la base de datos si no existe
 CREATE DATABASE IF NOT EXISTS sistema_inventario;
 
+-- Seleccionar la base de datos
 USE sistema_inventario;
 
-CREATE TABLE inventario (
+-- Crear la tabla de usuarios
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'editor') DEFAULT 'editor'
+);
+
+-- Crear la tabla de inventario
+CREATE TABLE IF NOT EXISTS inventario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
@@ -14,7 +25,8 @@ CREATE TABLE inventario (
     codigo_barras VARCHAR(100)
 );
 
-CREATE TABLE trabajadores (
+-- Crear la tabla de trabajadores
+CREATE TABLE IF NOT EXISTS trabajadores (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100),
@@ -25,6 +37,7 @@ CREATE TABLE trabajadores (
     fecha_contratacion DATE
 );
 
+-- Insertar datos en la tabla de inventario
 INSERT INTO inventario (nombre, descripcion, categoria, precio, cantidad, proveedor, fecha_ingreso, codigo_barras) 
 VALUES 
 ('Arroz', 'Arroz blanco de alta calidad', 'Alimentos', 2.50, 100, 'Proveedor A', '2024-01-10', '123456789'),
@@ -33,6 +46,7 @@ VALUES
 ('Cloro', 'Cloro para limpieza', 'Limpieza', 3.50, 40, 'Proveedor D', '2024-01-18', '456789012'),
 ('Fideos', 'Fideos largos', 'Alimentos', 1.80, 200, 'Proveedor E', '2024-01-20', '567890123');
 
+-- Insertar datos en la tabla de trabajadores
 INSERT INTO trabajadores (nombre, apellido, telefono, email, puesto, salario, fecha_contratacion) 
 VALUES 
 ('Juan', 'Pérez', '123456789', 'juan@mail.com', 'Cajero', 1200, '2023-05-15'),
