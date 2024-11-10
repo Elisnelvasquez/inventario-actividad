@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Trabajador</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <!-- Incluir SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
     <div class="container">
         <h1>Editar Trabajador</h1>
-        <form action="/trabajadores/edit/<%= trabajador.id %>" method="POST">
-           <label for="nombre">Nombre:</label>
+        <form id="edit-worker-form" action="/trabajadores/edit/<%= trabajador.id %>" method="POST">
+            <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" required value="<%= trabajador.nombre %>"><br>
-            <label for="nombre">Apellido:</label>
+            <label for="apellido">Apellido:</label>
             <input type="text" name="apellido" required value="<%= trabajador.apellido %>"><br>
-            <label for="nombre">Telefono:</label>
+            <label for="telefono">Telefono:</label>
             <input type="text" name="telefono" required value="<%= trabajador.telefono %>"><br>
-            <label for="nombre">Email:</label>
+            <label for="email">Email:</label>
             <input type="text" name="email" required value="<%= trabajador.email %>"><br>
             <label for="puesto">Puesto:</label>
             <input type="text" name="puesto" required value="<%= trabajador.puesto %>"><br>
@@ -28,6 +28,65 @@
         </form>
         <a href="/trabajadores" class="btn btn-volver-lista">Volver a la lista</a>
     </div>
-</body>
+<script>
+    // Obtener el token del localStorage
+    const token = localStorage.getItem('auth_token');
 
+    if (!token) {
+        // Redirigir al inicio de sesión si no hay token
+        window.location.replace('/');
+    }
+
+
+    document.getElementById('edit-worker-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Obtener los datos del formulario
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+
+        // Enviar la solicitud con fetch
+        fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json().then(data => ({
+                status: response.status,
+                body: data
+            })))
+            .then(({
+                status,
+                body
+            }) => {
+                if (status === 200) {
+                    Swal.fire(
+                        'Trabajador Actualizado',
+                        'El trabajador ha sido actualizado exitosamente.',
+                        'success'
+                    ).then(() => {
+                        window.location.href = '/trabajadores';
+                    });
+                } else {
+                    Swal.fire(
+                        'Error',
+                        body.message || 'Hubo un problema al actualizar el trabajador.',
+                        'error'
+                    );
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire(
+                    'Error',
+                    'Hubo un problema al actualizar el trabajador.',
+                    'error'
+                );
+            });
+    });
+</script>
+</body>
 </html>

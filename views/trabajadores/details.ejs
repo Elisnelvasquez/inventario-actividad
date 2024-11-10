@@ -20,6 +20,13 @@
         <p><strong>Fecha contratación:</strong> <%= new Date(trabajador.fecha_contratacion).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>   
         <a href="/trabajadores" class="btn btn-volver" style="margin: 0px;">Volver a la lista</a>
     </div>
-</body>
+    <script>
+        const token = localStorage.getItem('auth_token');
 
+        if (!token) {
+            // Redirigir al inicio de sesión si no hay token
+            window.location.replace('/');
+        }
+    </script>
+</body>
 </html>
