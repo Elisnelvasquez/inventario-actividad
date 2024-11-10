@@ -22,12 +22,22 @@ class TrabajadoresController {
       email,
       fecha_contratacion
     } = req.body;
+    const query = `
+        INSERT INTO trabajadores (nombre, puesto, salario, apellido, telefono, email, fecha_contratacion) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    `;
+
     db.query(
-      "INSERT INTO trabajadores (nombre, puesto, salario, apellido, telefono, email, fecha_contratacion) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      query,
       [nombre, puesto, salario, apellido, telefono, email, fecha_contratacion],
       (err) => {
-        if (err) throw err;
-        res.redirect("/trabajadores");
+        if (err) {
+          console.log(err.message);
+          return res
+            .status(500)
+            .json({ message: "Error al agregar el trabajador" });
+        }
+        res.status(200).json({ message: "Trabajador agregado exitosamente" });
       }
     );
   }
@@ -52,24 +62,27 @@ class TrabajadoresController {
       salario,
       apellido,
       telefono,
-      email,
-      fecha_contratacion
+      email
     } = req.body;
+
+    const query = `
+        UPDATE trabajadores 
+        SET nombre = ?, puesto = ?, salario = ?, apellido = ?, telefono = ?, email = ?
+        WHERE id = ?
+    `;
+
     db.query(
-      "UPDATE trabajadores SET nombre = ?, puesto = ?, salario = ?, apellido = ?, telefono = ?, email = ?, fecha_contratacion = ? WHERE id = ?",
-      [
-        nombre,
-        puesto,
-        salario,
-        apellido,
-        telefono,
-        email,
-        fecha_contratacion,
-        id
-      ],
+      query,
+      [nombre, puesto, salario, apellido, telefono, email, id],
       (err) => {
-        if (err) throw err;
-        res.redirect("/trabajadores");
+        if (err) {
+          return res
+            .status(500)
+            .json({ message: "Error al actualizar el trabajador" });
+        }
+        res
+          .status(200)
+          .json({ message: "Trabajador actualizado exitosamente" });
       }
     );
   }
@@ -77,8 +90,12 @@ class TrabajadoresController {
   static delete(req, res) {
     const id = req.params.id;
     db.query("DELETE FROM trabajadores WHERE id = ?", [id], (err) => {
-      if (err) throw err;
-      res.redirect("/trabajadores");
+      if (err) {
+        return res
+          .status(500)
+          .json({ message: "Error al eliminar el trabajador" });
+      }
+      res.status(200).json({ message: "Trabajador eliminado exitosamente" });
     });
   }
 
