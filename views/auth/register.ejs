@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Registro</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+<div class="container center">
+    <h2>Registro</h2>
+    <form action="/auth/register" method="POST">
+        <label>Nombre de usuario:</label>
+        <input type="text" name="username" required>
+        <label>Contraseña:</label>
+        <input type="password" name="password" required>
+        <label>Rol:</label>
+        <select name="role">
+            <option value="editor">Editor</option>
+            <option value="admin">Admin</option>
+        </select>
+        <button type="submit">Registrarse</button>
+    </form>
+    <a href="/auth/login">¿Ya tienes una cuenta? Inicia sesión</a>
+</div>
+
+<script>
+    // Mostrar SweetAlert si hay un mensaje de error
+    <% if (typeof error !== 'undefined') { %>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '<%= error %>'
+        });
+    <% } %>
+</script>
+</body>
+</html>
