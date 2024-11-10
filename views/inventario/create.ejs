@@ -1,45 +1,90 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Producto</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <!-- Incluir SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
     <div class="container">
         <h1>Agregar Producto</h1>
-        <form action="/inventario/create" method="POST" style="margin-bottom: 8px;">
+        <form id="create-product-form" style="margin-bottom: 8px;">
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" required><br>
-
-            <label for="nombre">Descripción:</label>
+            <label for="descripcion">Descripción:</label>
             <input type="text" name="descripcion" required><br>
-
             <label for="categoria">Categoría:</label>
             <input type="text" name="categoria" required><br>
-
             <label for="precio">Precio:</label>
             <input type="number" name="precio" step="0.01" required><br>
-
             <label for="cantidad">Cantidad:</label>
             <input type="number" name="cantidad" required><br>
-
-            <label for="descripcion">Proveedor:</label>
-            <input type="text" name="proveedor" required></input><br>
-
-            <label for="descripcion">Fecha ingreso:</label>
-            <input name="fecha_ingreso" type="date" required></input><br>
-
-            <label for="descripcion">Código barras:</label>
-            <input type="text" name="codigo_barras" required></input><br>
-
+            <label for="proveedor">Proveedor:</label>
+            <input type="text" name="proveedor" required><br>
+            <label for="fecha_ingreso">Fecha ingreso:</label>
+            <input type="date" name="fecha_ingreso" required><br>
+            <label for="codigo_barras">Código barras:</label>
+            <input type="text" name="codigo_barras" required><br>
             <button type="submit">Guardar</button>
-        </form>
-        <a href="/inventario" style="text-decoration: underline;">Volver a la lista</a>
-    </div>
-</body>
+            </form>
+            <a href="/inventario" style="text-decoration: underline;">Volver a la lista</a>
+            </div>
 
+    <script>
+        // Obtener el token del localStorage
+        const token = localStorage.getItem('auth_token');
+
+        if (!token) {
+        // Redirigir al inicio de sesión si no hay token
+        window.location.replace('/');
+        }
+
+        document.getElementById('create-product-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+            // Obtener los datos del formulario
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // Enviar la solicitud con fetch
+            fetch('/inventario/create', {
+            method: 'POST',
+            headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+            })
+            .then(response => response.json().then(data => ({ status: response.status, body: data })))
+            .then(({ status, body }) => {
+            if (status === 200) {
+            Swal.fire(
+            'Producto Agregado',
+            'El producto ha sido agregado exitosamente.',
+            'success'
+            ).then(() => {
+            window.location.href = '/inventario';
+            });
+            } else {
+            Swal.fire(
+            'Error',
+            body.message || 'Hubo un problema al agregar el producto.',
+            'error'
+            );
+            }
+            })
+            .catch(error => {
+            console.error('Error:', error);
+            Swal.fire(
+            'Error',
+            'Hubo un problema al agregar el producto.',
+            'error'
+            );
+            });
+            });
+            </script>
+</body>
 </html>

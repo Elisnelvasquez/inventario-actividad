@@ -13,7 +13,30 @@
         <div class="button-container">
             <a href="/inventario" class="button">Ver Productos</a>
             <a href="/trabajadores" class="button">Ver Trabajadores</a>
+            <button id="logout-button" class="button">Cerrar Sesión</button>
         </div>
     </div>
+<script>
+    // Guardar el token en localStorage si se pasa desde el backend
+    const backendToken = '<%= token %>';
+    if (backendToken) {
+        localStorage.setItem('auth_token', backendToken);
+    }
+
+    // Verificar si el token está en el localStorage
+    const token = localStorage.getItem('auth_token');
+    if (!token) {
+        // Redirigir al inicio de sesión si no hay token
+        window.location.replace('/');
+    }
+
+    // Manejar el evento de cerrar sesión
+    document.getElementById('logout-button').addEventListener('click', function () {
+        // Remover el token de localStorage
+        localStorage.removeItem('auth_token');
+        // Redirigir a la página inicial
+        window.location.replace('/');
+    });
+</script>
 </body>
 </html>

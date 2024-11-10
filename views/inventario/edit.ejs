@@ -1,42 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Producto</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <!-- Incluir SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
     <div class="container">
         <h1>Editar Producto</h1>
-        <form action="/inventario/edit/<%= producto.id %>" method="POST">
+        <form id="edit-product-form" action="/inventario/edit/<%= producto.id %>" method="POST">
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" value="<%= producto.nombre %>" required><br>
-
             <label for="descripcion">Descripción:</label>
             <textarea name="descripcion" required><%= producto.descripcion %></textarea><br>
-
             <label for="categoria">Categoría:</label>
             <input type="text" name="categoria" value="<%= producto.categoria %>" required><br>
-
             <label for="precio">Precio:</label>
             <input type="number" name="precio" value="<%= producto.precio %>" step="0.01" required><br>
-
             <label for="cantidad">Cantidad:</label>
             <input type="number" name="cantidad" value="<%= producto.cantidad %>" required><br>
-
-            <label for="cantidad">Proveedor:</label>
+            <label for="proveedor">Proveedor:</label>
             <input type="text" name="proveedor" value="<%= producto.proveedor %>" required><br>
-
-            <label for="cantidad">Código barras:</label>
-            <input type="text" name="codigo_barras" value="<%= producto.codigo_barras %>" required><br>            
-
+            <label for="codigo_barras">Código barras:</label>
+            <input type="text" name="codigo_barras" value="<%= producto.codigo_barras %>" required><br>
             <button type="submit">Actualizar</button>
         </form>
         <a href="/inventario" class="btn btn-volver-lista">Volver a la lista</a>
     </div>
-</body>
+<script>
+    // Obtener el token del localStorage
+    const token = localStorage.getItem('auth_token');
 
+    if (!token) {
+        // Redirigir al inicio de sesión si no hay token
+        window.location.replace('/');
+    }
+
+    document.getElementById('edit-product-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Obtener los datos del formulario
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+
+        // Enviar la solicitud con fetch
+        fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json().then(data => ({
+                status: response.status,
+                body: data
+            })))
+            .then(({
+                status,
+                body
+            }) => {
+                if (status === 200) {
+                    Swal.fire(
+                        'Producto Actualizado',
+                        'El producto ha sido actualizado exitosamente.',
+                        'success'
+                    ).then(() => {
+                        window.location.href = '/inventario';
+                    });
+                } else {
+                    Swal.fire(
+                        'Error',
+                        body.message || 'Hubo un problema al actualizar el producto.',
+                        'error'
+                    );
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire(
+                    'Error',
+                    'Hubo un problema al actualizar el producto.',
+                    'error'
+                );
+            });
+    });
+</script>
+</body>
 </html>

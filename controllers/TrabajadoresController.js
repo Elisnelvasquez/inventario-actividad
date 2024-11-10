@@ -70,7 +70,7 @@ class TrabajadoresController {
         SET nombre = ?, puesto = ?, salario = ?, apellido = ?, telefono = ?, email = ?
         WHERE id = ?
     `;
-
+ 
     db.query(
       query,
       [nombre, puesto, salario, apellido, telefono, email, id],
