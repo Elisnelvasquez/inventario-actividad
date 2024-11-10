@@ -22,9 +22,9 @@ Crear un archivo `.env` en la raíz del proyecto con las siguientes variables:
 ```plaintext
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=tu_contraseña
+DB_PASSWORD=
 DB_NAME=sistema_inventario
-JWT_SECRET=tu_secreto_jwt
+JWT_SECRET=secret_jwt
 PORT=3000
 ```
 
